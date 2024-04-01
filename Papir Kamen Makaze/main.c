@@ -12,27 +12,30 @@ int main()
 	while (!WindowShouldClose())
 	{
 		
-		pictureRender();
 		collisionDetection();
+		pictureRender();
+		
 
 	}
 	CloseWindow();
 }
 
 void pictureRender()
-{ 
+{
+	int rec1X = 100, recy = 450,
+		rec2x = 300, rec3x = 500;
 
 BeginDrawing();
 
 	ClearBackground(GRAY);
-	DrawRectangle(100, 450, 150, 50, WHITE);
-		DrawText("kamen", 110, 450, 20, BLACK);
+	DrawRectangle(rec1X, recy, 150, 50, WHITE);
+		DrawText("kamen", rec1X + 10, recy, 20, BLACK);
 
-	DrawRectangle(300, 450, 150, 50, WHITE);
-		DrawText("papir", 310, 450, 20, BLACK);
+	DrawRectangle(rec2x, recy, 150, 50, WHITE);
+		DrawText("papir", rec2x + 10, recy, 20, BLACK);
 
-	DrawRectangle(500, 450, 150, 50, WHITE);
-		DrawText("makaze", 510, 450, 20, BLACK);
+	DrawRectangle(rec3x, recy, 150, 50, WHITE);
+		DrawText("makaze", rec3x + 10, recy, 20, BLACK);
 
 	DrawText("Izaberite Kamen, Papir ili Makaze", 80, 200, 40, WHITE);
 
@@ -45,5 +48,6 @@ void collisionDetection()
 	int mouseX = GetMouseX();
 	int mouseY = GetMouseY();
 	
+	if ()
 
 }
