@@ -14,34 +14,40 @@ int main()
 
 	InitWindow(800, 600, "Kamen Papir Makaze");
 
+	cpuChoise(0);
+
 	while (!WindowShouldClose())
 	{
 		pictureRender();
-		winCheck(0);
 	}
 	CloseWindow();
+}
+
+cpuChoise(int Choise)
+{
+
+	Choise = GetRandomValue(1, 3);
+	return Choise;
+
 }
 
 int inputDetection(int pravac)
 {  
 
-	if (IsKeyPressed(KEY_KP_1))
+	if (IsKeyPressed(KEY_KP_1) || IsKeyPressed(KEY_ONE))
 	{
 		return pravac + 1;
 
-	}else if (IsKeyPressed(KEY_KP_2))
+	}else if (IsKeyPressed(KEY_KP_2) || IsKeyPressed(KEY_TWO))
 	{
 		return pravac + 2;
 
-	}else if (IsKeyPressed(KEY_KP_3))
+	}else if (IsKeyPressed(KEY_KP_3) || IsKeyPressed(KEY_THREE))
 	{
 		return pravac + 3;
 
 	}
-	else if (IsKeyPressed(KEY_R))
-	{
-		return pravac;
-	}
+	
 }
 
 int winCheck(int winState)
@@ -50,7 +56,7 @@ int winCheck(int winState)
 	// 3 = makaze 
 
 	int smer = inputDetection(0);
-	int botChoise = GetRandomValue(1, 3);
+	int botChoise = cpuChoise(0);
 
 	if (smer == botChoise)
 	{
@@ -102,7 +108,16 @@ int winCheck(int winState)
 		printf("pobedio si\n");
 		winState = 3;
 		return winState;
+
 	}
+	else
+	{
+
+		winState = 0;
+		return winState;
+
+	}
+
 	
 
 }
@@ -113,22 +128,50 @@ void pictureRender()
 		rec2x = 300, rec3x = 500;
 
 
+	int stranica = winCheck(0);
+	//stranica = 
 
 	BeginDrawing();
 
-
-
 		ClearBackground(GRAY);
-		DrawRectangle(rec1X, recy, 150, 50, WHITE);
+	
+		if (stranica == 0)
+		{
+			SetTargetFPS(60);
+			DrawRectangle(rec1X, recy, 150, 50, WHITE);
 			DrawText("1: kamen", rec1X + 10, recy, 20, BLACK);
 
-		DrawRectangle(rec2x, recy, 150, 50, WHITE);
+			DrawRectangle(rec2x, recy, 150, 50, WHITE);
 			DrawText("2: papir", rec2x + 10, recy, 20, BLACK);
 
-		DrawRectangle(rec3x, recy, 150, 50, WHITE);
+			DrawRectangle(rec3x, recy, 150, 50, WHITE);
 			DrawText("3: makaze", rec3x + 10, recy, 20, BLACK);
 
-		DrawText("Izaberite Kamen, Papir ili Makaze", 80, 200, 40, WHITE);
+			DrawText("Izaberite Kamen, Papir ili Makaze", 80, 200, 40, WHITE);
+
+		}
+		else if (stranica == 1)
+		{
+
+			DrawText("Nereseno", 80, 200, 40, WHITE);
+			SetTargetFPS(1);
+		}
+		else if (stranica == 2)
+		{
+
+			DrawText("Izgubio si", 80, 200, 40, WHITE);
+			SetTargetFPS(1);
+
+		}
+		else if (stranica == 3)
+		{
+
+			DrawText("Pobedio si", 80, 200, 40, WHITE);
+			SetTargetFPS(1);
+		}
+
+		
+		
 
 	EndDrawing();
 
